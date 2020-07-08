@@ -9,20 +9,25 @@ import DeckDetail from "../screens/DeckDetail";
 import AddCard from "../screens/AddCard";
 import Quiz from "../screens/Quiz";
 import QuizResult from "../screens/QuizResult";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 // import store from "../store";
 // import { getDecks } from "../actions";
 // import { themeColor } from "../utils/helper";
 // import * as DecksApi from "../utils/DecksApi";
 
-// const { Navigator, Screen } = createStackNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 AllDeckStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="AllDecks" component={AllDecks} />
+      <Stack.Screen
+        name="AllDecks"
+        component={AllDecks}
+        options={{
+          headerTitle: "All Decks",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -30,11 +35,29 @@ AllDeckStack = () => {
 CreateDeckStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="CreateDeck" component={CreateDeck} />
+      <Stack.Screen
+        name="CreateDeck"
+        component={CreateDeck}
+        options={{
+          headerTitle: "Create Deck",
+        }}
+      />
       <Stack.Screen name="DeckDetail" component={DeckDetail} />
-      <Stack.Screen name="AddCard" component={AddCard} />
+      <Stack.Screen
+        name="AddCard"
+        component={AddCard}
+        options={{
+          headerTitle: "Add Card",
+        }}
+      />
       <Stack.Screen name="Quiz" component={Quiz} />
-      <Stack.Screen name="QuizResult" component={QuizResult} />
+      <Stack.Screen
+        name="QuizResult"
+        component={QuizResult}
+        options={{
+          headerTitle: "Result",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -43,27 +66,29 @@ export default class navigation extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator
+          tabBarOptions={{
+            activeTintColor: "blue",
+            labelStyle: { fontSize: 15 },
+          }}
+        >
           <Tab.Screen
             name="Decks"
             component={AllDeckStack}
-            // options={({ route }) => ({
-            //   tabBarLabel: "Decks",
-            //   tabBarIcon: ({ color, size }) => (
-            //     <Ionicons size={size} color={color} name={"ios-book"} />
-            //   ),
-            //   tabBarVisible: getTabBarVisible(route, DecksScreens),
-            // })}
+            options={() => ({
+              tabBarIcon: ({ color }) => (
+                <Feather size={30} color={color} name="layers" />
+              ),
+            })}
           />
           <Tab.Screen
             name="Add Deck"
             component={CreateDeckStack}
-            // options={{
-            //   tabBarLabel: "Add Deck",
-            //   tabBarIcon: ({ color, size }) => (
-            //     <MaterialIcons size={size} color={color} name={"add-box"} />
-            //   ),
-            // }}
+            options={() => ({
+              tabBarIcon: ({ color }) => (
+                <Feather size={30} color={color} name="plus-square" />
+              ),
+            })}
           />
         </Tab.Navigator>
       </NavigationContainer>
