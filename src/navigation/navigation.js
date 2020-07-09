@@ -12,7 +12,6 @@ import QuizResult from "../screens/QuizResult";
 import { Feather } from "@expo/vector-icons";
 // import store from "../store";
 // import { getDecks } from "../actions";
-// import { themeColor } from "../utils/helper";
 // import * as DecksApi from "../utils/DecksApi";
 
 const Stack = createStackNavigator();
@@ -95,90 +94,3 @@ export default class navigation extends Component {
     );
   }
 }
-// const StackOptions = {
-//   headerTintColor: "#fff",
-//   headerStyle: {
-//     backgroundColor: themeColor,
-//   },
-//   headerTitleStyle: {
-//     fontSize: 20,
-//   },
-//   headerBackTitleVisible: false,
-// };
-
-// const DecksStack = () => {
-//   return (
-//     <Navigator>
-//       <Screen
-//         name="Decks"
-//         component={Decks}
-//         options={{
-//           headerTitle: "",
-//           ...StackOptions,
-//         }}
-//       />
-//       <Screen name="Deck" component={Deck} options={StackOptions} />
-//       <Screen
-//         name="AddCard"
-//         component={AddCard}
-//         options={{
-//           headerTitle: "Add Card",
-//           ...StackOptions,
-//         }}
-//       />
-//       <Screen name="Quiz" component={Quiz} options={StackOptions} />
-//       <Screen name="Result" component={Result} options={StackOptions} />
-//     </Navigator>
-//   );
-// };
-
-// const AddDeckStack = () => {
-//   return (
-//     <Navigator>
-//       <Screen
-//         name="AddDeck"
-//         component={AddDeck}
-//         options={{
-//           headerTitle: "",
-//           ...StackOptions,
-//         }}
-//       />
-//     </Navigator>
-//   );
-// };
-
-// const DecksScreens = ["Deck", "Quiz", "Result", "AddCard"];
-
-// const bgColor = Platform.OS === "ios" ? "#fff" : "#fff";
-// const tintColor = Platform.OS === "ios" ? themeColor : themeColor;
-// const tabOptions = {
-//   activeTintColor: tintColor,
-//   style: { backgroundColor: bgColor },
-//   labelStyle: { fontSize: 14, paddingTop: 0 },
-//   indicatorStyle: { backgroundColor: "#fff", height: 2.5 },
-// };
-
-// const getTabBarVisible = (route, array) => {
-//   const routeName =
-//     route.state &&
-//     route.state.routes &&
-//     route.state.index &&
-//     route.state.routes.length > 0 &&
-//     route.state.routes[route.state.index].name
-//       ? route.state.routes[route.state.index].name
-//       : "";
-//   if (array.includes(routeName)) return false;
-//   return true;
-// };
-
-// const Navigation = () => {
-//   const fetchData = async () => {
-//     const data = await DecksApi.getDecks();
-//     store.dispatch(getDecks(data));
-//   };
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-// };
-
-// export default Navigation;

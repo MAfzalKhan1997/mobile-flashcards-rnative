@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
+import * as actions from "../redux/actions";
+
+const deckId = () => Math.random().toString(36).substring(2, 15);
+
 export class CreateDecks extends Component {
   constructor(props, context) {
     super(props, context);
@@ -13,6 +17,23 @@ export class CreateDecks extends Component {
     this.setState({
       deckTitle,
     });
+  };
+
+  createDeck = () => {
+    const { deckTitle } = this.state;
+
+    const deckObj = {
+      id: deckId(),
+      title: deckTitle,
+      questions: [],
+      created: new Date(),
+    };
+    this.props.createDeck(deckObj);
+    this.setState({
+      deckTitle: "",
+    });
+
+    // this.props.navigation.navigate("DeckDetail");
   };
 
   render() {
@@ -27,7 +48,7 @@ export class CreateDecks extends Component {
             onChangeText={this.handleChange}
             style={{
               backgroundColor: "white",
-              height: 70,
+              height: 60,
               fontSize: 20,
               borderWidth: 1,
               borderColor: "grey",
@@ -52,7 +73,7 @@ export class CreateDecks extends Component {
               width: 300,
               borderRadius: 5,
             }}
-            onPress={() => this.props.navigation.navigate("DeckDetail")}
+            onPress={() => this.createDeck()}
           >
             <Text style={{ color: "white", fontSize: 20 }}>Create Deck</Text>
           </TouchableOpacity>
@@ -64,6 +85,6 @@ export class CreateDecks extends Component {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+// const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateDecks);
+export default connect(mapStateToProps, actions)(CreateDecks);

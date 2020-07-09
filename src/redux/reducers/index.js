@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
-import dummyReducer from "./dummyReducer";
+import reducer from "./reducer";
 
 export default combineReducers({
-  //   form: formReducer,
-  dummy: dummyReducer,
+  data: reducer,
 });
