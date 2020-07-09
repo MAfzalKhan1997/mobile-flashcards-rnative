@@ -10,13 +10,16 @@ export class DeckDetail extends Component {
   }
 
   render() {
+    const { deckObj } = this.props;
     return (
       <View style={{ flex: 1, justifyContent: "space-between", margin: 10 }}>
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text style={{ fontSize: 30 }}>Deck2</Text>
-          <Text style={{ fontSize: 20, color: "grey" }}>0 cards</Text>
+          <Text style={{ fontSize: 30 }}>{deckObj?.title}</Text>
+          <Text style={{ fontSize: 20, color: "grey" }}>
+            {deckObj?.questions.length} cards
+          </Text>
         </View>
         <View
           style={{
@@ -37,7 +40,11 @@ export class DeckDetail extends Component {
               borderRadius: 5,
               margin: 10,
             }}
-            onPress={() => this.props.navigation.navigate("AddCard")}
+            onPress={() =>
+              this.props.navigation.navigate("AddCard", {
+                id: deckObj.id,
+              })
+            }
           >
             <Text style={{ color: "black", fontSize: 20 }}>Add Card</Text>
           </TouchableOpacity>
@@ -61,7 +68,9 @@ export class DeckDetail extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = ({ data }) => ({
+  deckObj: data.deck || null,
+});
 
 const mapDispatchToProps = {};
 

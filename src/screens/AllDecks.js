@@ -9,6 +9,11 @@ export class AllDecks extends Component {
     this.props.getAllDecks();
   }
 
+  redirect = (id) => {
+    this.props.getDeck(id);
+    this.props.navigation.navigate("DeckDetail");
+  };
+
   render() {
     const { decks } = this.props;
     if (decks.length > 0)
@@ -27,12 +32,7 @@ export class AllDecks extends Component {
                   padding: 10,
                   borderRadius: 10,
                 }}
-                //   onPress={() =>
-                //     navigation.navigate("DeckDetail", {
-                //       deckId: item.id,
-                //       name: item.name,
-                //     })
-                //   }
+                onPress={() => this.redirect(id)}
               >
                 <Text
                   style={{
@@ -67,7 +67,7 @@ export class AllDecks extends Component {
 }
 
 const mapStateToProps = ({ data }) => {
-  console.log("REDUX_STATE", data);
+  //   console.log("REDUX_STATE", data);
   return {
     decks: data.decks || [],
   };

@@ -10,18 +10,18 @@ export const createDeck = (object) => (dispatch) => {
 
       if (decks) {
         decks.push(object);
+        await AsyncStorage.setItem("Flashcard:DECKS", JSON.stringify(decks));
         dispatch({
           type: "ALL_DECKS",
           decks,
         });
-        await AsyncStorage.setItem("Flashcard:DECKS", JSON.stringify(decks));
         return;
       }
+      await AsyncStorage.setItem("Flashcard:DECKS", JSON.stringify([object]));
       dispatch({
         type: "ALL_DECKS",
         decks: [object],
       });
-      await AsyncStorage.setItem("Flashcard:DECKS", JSON.stringify([object]));
     } catch (error) {
       console.log("ERROR", error);
     }
@@ -36,6 +36,47 @@ export const getAllDecks = () => (dispatch) => {
       dispatch({
         type: "ALL_DECKS",
         decks: JSON.parse(decks),
+      });
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  })();
+};
+
+export const addCard = (questionObj, id) => (dispatch) => {
+  console.log("QUESTION_OBJ", questionObj);
+  (async () => {
+    try {
+      let decks = await AsyncStorage.getItem("Flashcard:DECKS");
+      decks = JSON.parse(decks);
+      const index = decks.findIndex((deck) => deck.id === id);
+      decks[index].questions.push(questionObj);
+      await AsyncStorage.setItem("Flashcard:DECKS", JSON.stringify(decks));
+      dispatch({
+        type: "GET_DECK",
+        deck: decks[index],
+      });
+      dispatch({
+        type: "ALL_DECKS",
+        decks,
+      });
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  })();
+};
+
+export const getDeck = (id) => (dispatch) => {
+  console.log("GET_DECK");
+  (async () => {
+    try {
+      let decks = await AsyncStorage.getItem("Flashcard:DECKS");
+      decks = JSON.parse(decks);
+      const deck = decks.find((deck) => deck.id === id);
+      console.log(deck);
+      dispatch({
+        type: "GET_DECK",
+        deck,
       });
     } catch (error) {
       console.log("ERROR", error);

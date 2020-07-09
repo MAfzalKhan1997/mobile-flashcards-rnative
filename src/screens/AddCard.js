@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
+import * as actions from "../redux/actions";
+
 export class AddCard extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { question: "", answer: "" };
+    this.state = { question: "", answer: "", deckId: "" };
+  }
+
+  componentDidMount() {
+    this.setState({
+      deckId: this.props.route.params.id,
+    });
   }
 
   handleChange = (value, title) => {
@@ -20,6 +28,21 @@ export class AddCard extends Component {
         answer: value,
       });
     }
+  };
+
+  submitCard = () => {
+    const { question, answer, deckId } = this.state;
+
+    const questionObj = {
+      question,
+      answer,
+    };
+    this.props.addCard(questionObj, deckId);
+    this.setState({
+      question: "",
+      answer: "",
+    });
+    this.props.navigation.navigate("DeckDetail");
   };
 
   render() {
@@ -74,7 +97,7 @@ export class AddCard extends Component {
               width: 300,
               borderRadius: 5,
             }}
-            onPress={() => this.props.navigation.navigate("DeckDetail")}
+            onPress={() => this.submitCard()}
           >
             <Text style={{ color: "white", fontSize: 20 }}>Submit</Text>
           </TouchableOpacity>
@@ -86,6 +109,6 @@ export class AddCard extends Component {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+// const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCard);
+export default connect(mapStateToProps, actions)(AddCard);

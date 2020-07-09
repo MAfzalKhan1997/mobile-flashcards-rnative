@@ -26,14 +26,17 @@ export class CreateDecks extends Component {
       id: deckId(),
       title: deckTitle,
       questions: [],
-      created: new Date(),
     };
     this.props.createDeck(deckObj);
     this.setState({
       deckTitle: "",
     });
 
-    // this.props.navigation.navigate("DeckDetail");
+    this.props.navigation.navigate("DeckDetail", {
+      id: deckObj.id,
+      title: deckObj.title,
+      questions: deckObj.questions,
+    });
   };
 
   render() {
