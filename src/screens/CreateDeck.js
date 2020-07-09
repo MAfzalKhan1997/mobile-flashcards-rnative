@@ -32,11 +32,7 @@ export class CreateDecks extends Component {
       deckTitle: "",
     });
 
-    this.props.navigation.navigate("DeckDetail", {
-      id: deckObj.id,
-      title: deckObj.title,
-      questions: deckObj.questions,
-    });
+    this.props.navigation.navigate("DeckDetail");
   };
 
   render() {

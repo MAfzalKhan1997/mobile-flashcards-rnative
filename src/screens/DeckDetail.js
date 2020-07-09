@@ -9,6 +9,20 @@ export class DeckDetail extends Component {
     this.state = {};
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setTitle(nextProps);
+  }
+
+  setTitle = (props) => {
+    props.navigation.setOptions({ title: props?.deckObj?.title || "" });
+  };
+
+  redirect = (deck) => {
+    if (deck.questions.length === 0) {
+      alert("Sorry you don't have any card to start quiz");
+    } else this.props.navigation.navigate("Quiz");
+  };
+
   render() {
     const { deckObj } = this.props;
     return (
@@ -58,7 +72,7 @@ export class DeckDetail extends Component {
               borderRadius: 5,
               margin: 10,
             }}
-            onPress={() => this.props.navigation.navigate("Quiz")}
+            onPress={() => this.redirect(deckObj)}
           >
             <Text style={{ color: "white", fontSize: 20 }}>Start Quiz</Text>
           </TouchableOpacity>

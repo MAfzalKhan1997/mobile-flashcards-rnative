@@ -3,7 +3,23 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
 export class QuizResult extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      resultObj: { correctGuess: 0, totalQuestions: 0 },
+    };
+  }
+
+  componentDidMount() {
+    const resultObj = this.props.route.params;
+    this.setState({
+      resultObj,
+    });
+  }
+
   render() {
+    const { resultObj } = this.state;
     return (
       <View
         style={{
@@ -28,15 +44,18 @@ export class QuizResult extends Component {
               fontSize: 100,
             }}
           >
-            90%
-            {/* {`${Math.round((correctAnswer * 100) / totalQuestions)}%`} */}
+            {(
+              (resultObj?.correctGuess * 100) /
+              resultObj?.totalQuestions
+            ).toFixed(2)}
+            %
           </Text>
           <Text
             style={{
               fontSize: 25,
             }}
           >
-            Correct Answers: 2
+            Correct Answers: {resultObj?.correctGuess}
           </Text>
         </View>
         <View>
@@ -47,7 +66,7 @@ export class QuizResult extends Component {
               margin: 10,
               padding: 15,
             }}
-            // onPress={() => retakeQuiz()}
+            onPress={() => this.props.navigation.navigate("Quiz")}
           >
             <Text
               style={{

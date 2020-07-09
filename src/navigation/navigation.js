@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { Platform } from "react-native";
+
 import AllDecks from "../screens/AllDecks";
 import CreateDeck from "../screens/CreateDeck";
 import DeckDetail from "../screens/DeckDetail";
@@ -10,9 +10,6 @@ import AddCard from "../screens/AddCard";
 import Quiz from "../screens/Quiz";
 import QuizResult from "../screens/QuizResult";
 import { Feather } from "@expo/vector-icons";
-// import store from "../store";
-// import { getDecks } from "../actions";
-// import * as DecksApi from "../utils/DecksApi";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,20 +22,6 @@ AllDeckStack = () => {
         component={AllDecks}
         options={{
           headerTitle: "All Decks",
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
-
-CreateDeckStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="CreateDeck"
-        component={CreateDeck}
-        options={{
-          headerTitle: "Create Deck",
         }}
       />
       <Stack.Screen name="DeckDetail" component={DeckDetail} />
@@ -55,6 +38,20 @@ CreateDeckStack = () => {
         component={QuizResult}
         options={{
           headerTitle: "Result",
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+CreateDeckStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="CreateDeck"
+        component={CreateDeck}
+        options={{
+          headerTitle: "Create Deck",
         }}
       />
     </Stack.Navigator>

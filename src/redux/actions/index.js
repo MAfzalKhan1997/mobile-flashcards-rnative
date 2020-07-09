@@ -3,6 +3,10 @@ import { AsyncStorage } from "react-native";
 
 export const createDeck = (object) => (dispatch) => {
   console.log("CREATE_DECK");
+  dispatch({
+    type: "GET_DECK",
+    deck: object,
+  });
   (async () => {
     try {
       let decks = await AsyncStorage.getItem("Flashcard:DECKS");
@@ -44,7 +48,7 @@ export const getAllDecks = () => (dispatch) => {
 };
 
 export const addCard = (questionObj, id) => (dispatch) => {
-  console.log("QUESTION_OBJ", questionObj);
+  console.log("ADD_CARD");
   (async () => {
     try {
       let decks = await AsyncStorage.getItem("Flashcard:DECKS");
@@ -73,7 +77,6 @@ export const getDeck = (id) => (dispatch) => {
       let decks = await AsyncStorage.getItem("Flashcard:DECKS");
       decks = JSON.parse(decks);
       const deck = decks.find((deck) => deck.id === id);
-      console.log(deck);
       dispatch({
         type: "GET_DECK",
         deck,

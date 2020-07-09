@@ -8,11 +8,64 @@ export class Quiz extends Component {
 
     this.state = {
       isAnswer: false,
+      questionNo: 0,
+      correctGuess: 0,
     };
   }
 
+  handleCorrect = (deckObj) => {
+    const { correctGuess, questionNo } = this.state;
+    this.setState(
+      {
+        correctGuess: correctGuess + 1,
+      },
+      () => {
+        this.redirect(deckObj, questionNo, this.state.correctGuess);
+      }
+    );
+  };
+
+  redirect = (deckObj, questionNo, correctGuess) => {
+    if (questionNo === deckObj.questions.length - 1) {
+      this.props.navigation.navigate("QuizResult", {
+        totalQuestions: deckObj.questions.length,
+        correctGuess,
+      });
+      this.setState({
+        isAnswer: false,
+        questionNo: 0,
+        correctGuess: 0,
+      });
+    } else {
+      this.setState({
+        questionNo: questionNo + 1,
+      });
+    }
+  };
+
+  handleInCorrect = (deckObj) => {
+    const { questionNo, correctGuess } = this.state;
+    if (questionNo === deckObj.questions.length - 1) {
+      this.props.navigation.navigate("QuizResult", {
+        totalQuestions: deckObj.questions.length,
+        correctGuess,
+      });
+      this.setState({
+        isAnswer: false,
+        questionNo: 0,
+        correctGuess: 0,
+      });
+    } else {
+      this.setState({
+        questionNo: questionNo + 1,
+      });
+    }
+  };
+
   render() {
-    const { isAnswer } = this.state;
+    const { isAnswer, questionNo, correctGuess } = this.state;
+    const { deckObj } = this.props;
+    console.log(correctGuess);
     return (
       <View
         style={{ flex: 1, justifyContent: "center", backgroundColor: "white" }}
@@ -30,20 +83,18 @@ export class Quiz extends Component {
                 marginTop: 10,
               }}
             >
-              2/5
-              {/* {currentQuestionIndex + 1}/
-                {this.getDeckData().cards.length} */}
+              {questionNo + 1}/{deckObj.questions.length}
             </Text>
 
-            {/* {this.state.showQuestion ? ( */}
             <Text
               style={{
                 marginTop: 50,
                 fontSize: 25,
               }}
             >
-              {/* {card.question} */}
-              {!isAnswer ? `Hello Whats your name?` : "Muhammad Afzal Khan"}
+              {!isAnswer
+                ? deckObj.questions[questionNo].question
+                : deckObj.questions[questionNo].answer}
             </Text>
             <TouchableOpacity
               style={{
@@ -84,7 +135,7 @@ export class Quiz extends Component {
                 borderRadius: 5,
                 margin: 10,
               }}
-              // onPress={() => this.props.navigation.navigate("AddCard")}
+              onPress={() => this.handleCorrect(deckObj)}
             >
               <Text style={{ color: "white", fontSize: 20 }}>Correct</Text>
             </TouchableOpacity>
@@ -98,7 +149,7 @@ export class Quiz extends Component {
                 borderRadius: 5,
                 margin: 10,
               }}
-              onPress={() => this.props.navigation.navigate("QuizResult")}
+              onPress={() => this.handleInCorrect(deckObj)}
             >
               <Text style={{ color: "white", fontSize: 20 }}>InCorrect</Text>
             </TouchableOpacity>
@@ -109,8 +160,9 @@ export class Quiz extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
-
+const mapStateToProps = ({ data }) => ({
+  deckObj: data.deck || null,
+});
 const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
