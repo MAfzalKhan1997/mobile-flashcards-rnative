@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { connect } from "react-redux";
+
+import Button from "../components/Button";
 
 export class DeckDetail extends Component {
   constructor(props, context) {
@@ -42,40 +44,28 @@ export class DeckDetail extends Component {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity
-            style={{
-              backgroundColor: "white",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 60,
-              width: 300,
-              borderWidth: 1,
-              border: "black",
-              borderRadius: 5,
-              margin: 10,
-            }}
-            onPress={() =>
+          <Button
+            onBtnPress={() =>
               this.props.navigation.navigate("AddCard", {
                 id: deckObj.id,
               })
             }
-          >
-            <Text style={{ color: "black", fontSize: 20 }}>Add Card</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            style={{
+              backgroundColor: "white",
+              borderWidth: 1,
+              border: "black",
+            }}
+            text="Add Card"
+            textColor="black"
+          />
+          <Button
+            onBtnPress={() => this.redirect(deckObj)}
             style={{
               backgroundColor: "black",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 60,
-              width: 300,
-              borderRadius: 5,
-              margin: 10,
             }}
-            onPress={() => this.redirect(deckObj)}
-          >
-            <Text style={{ color: "white", fontSize: 20 }}>Start Quiz</Text>
-          </TouchableOpacity>
+            text="Start Quiz"
+            textColor="white"
+          />
         </View>
       </View>
     );

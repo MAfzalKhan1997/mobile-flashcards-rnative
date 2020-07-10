@@ -7,6 +7,8 @@ import {
   clearLocalNotification,
 } from "../services/notifications";
 
+import Button from "../components/Button";
+
 export class QuizResult extends Component {
   constructor(props, context) {
     super(props, context);
@@ -66,47 +68,24 @@ export class QuizResult extends Component {
           </Text>
         </View>
         <View>
-          <TouchableOpacity
+          <Button
+            onBtnPress={() => this.props.navigation.navigate("Quiz")}
             style={{
-              borderRadius: 5,
               backgroundColor: "black",
-              margin: 10,
-              padding: 15,
             }}
-            onPress={() => this.props.navigation.navigate("Quiz")}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                fontSize: 20,
-                color: "white",
-              }}
-            >
-              Restart Quiz
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            text="Restart Quiz"
+            textColor="white"
+          />
+          <Button
+            onBtnPress={() => this.props.navigation.navigate("DeckDetail")}
             style={{
-              borderRadius: 5,
               backgroundColor: "white",
-              borderWidth: 2,
-              borderColor: "black",
-              margin: 10,
-              padding: 15,
-              width: 300,
+              borderWidth: 1,
+              border: "black",
             }}
-            onPress={() => this.props.navigation.navigate("DeckDetail")}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                fontSize: 20,
-                color: "black",
-              }}
-            >
-              Back to Deck
-            </Text>
-          </TouchableOpacity>
+            text="Back to Deck"
+            textColor="black"
+          />
         </View>
       </View>
     );

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { connect } from "react-redux";
 
 import * as actions from "../redux/actions";
+import Button from "../components/Button";
 
 const deckId = () => Math.random().toString(36).substring(2, 15);
 
@@ -63,19 +64,14 @@ export class CreateDecks extends Component {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity
+          <Button
+            onBtnPress={this.createDeck}
             style={{
               backgroundColor: "black",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 60,
-              width: 300,
-              borderRadius: 5,
             }}
-            onPress={() => this.createDeck()}
-          >
-            <Text style={{ color: "white", fontSize: 20 }}>Create Deck</Text>
-          </TouchableOpacity>
+            text="Create Deck"
+            textColor="white"
+          />
         </View>
       </View>
     );

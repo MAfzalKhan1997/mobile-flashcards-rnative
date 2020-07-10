@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
+import Button from "../components/Button";
+
 export class Quiz extends Component {
   constructor(props, context) {
     super(props, context);
@@ -124,34 +126,22 @@ export class Quiz extends Component {
               alignItems: "center",
             }}
           >
-            <TouchableOpacity
+            <Button
+              onBtnPress={() => this.handleCorrect(deckObj)}
               style={{
                 backgroundColor: "green",
-                justifyContent: "center",
-                alignItems: "center",
-                height: 60,
-                width: 300,
-                borderRadius: 5,
-                margin: 10,
               }}
-              onPress={() => this.handleCorrect(deckObj)}
-            >
-              <Text style={{ color: "white", fontSize: 20 }}>Correct</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              text="Correct"
+              textColor="white"
+            />
+            <Button
+              onBtnPress={() => this.handleInCorrect(deckObj)}
               style={{
                 backgroundColor: "red",
-                justifyContent: "center",
-                alignItems: "center",
-                height: 60,
-                width: 300,
-                borderRadius: 5,
-                margin: 10,
               }}
-              onPress={() => this.handleInCorrect(deckObj)}
-            >
-              <Text style={{ color: "white", fontSize: 20 }}>InCorrect</Text>
-            </TouchableOpacity>
+              text="InCorrect"
+              textColor="white"
+            />
           </View>
         </View>
       </View>

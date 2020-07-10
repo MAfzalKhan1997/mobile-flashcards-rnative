@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { connect } from "react-redux";
 
 import * as actions from "../redux/actions";
+import Button from "../components/Button";
 
 export class AddCard extends Component {
   constructor(props, context) {
@@ -88,19 +89,14 @@ export class AddCard extends Component {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity
+          <Button
+            onBtnPress={() => this.submitCard()}
             style={{
               backgroundColor: "black",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 60,
-              width: 300,
-              borderRadius: 5,
             }}
-            onPress={() => this.submitCard()}
-          >
-            <Text style={{ color: "white", fontSize: 20 }}>Submit</Text>
-          </TouchableOpacity>
+            text="Submit"
+            textColor="white"
+          />
         </View>
       </View>
     );
