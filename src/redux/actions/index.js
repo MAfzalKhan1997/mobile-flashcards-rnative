@@ -1,5 +1,4 @@
 import { AsyncStorage } from "react-native";
-// await AsyncStorage.removeItem("Flashcard:DECKS");
 
 export const createDeck = (object) => (dispatch) => {
   console.log("CREATE_DECK");

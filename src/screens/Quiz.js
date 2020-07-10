@@ -63,7 +63,7 @@ export class Quiz extends Component {
   };
 
   render() {
-    const { isAnswer, questionNo, correctGuess } = this.state;
+    const { isAnswer, questionNo } = this.state;
     const { deckObj } = this.props;
     return (
       <View

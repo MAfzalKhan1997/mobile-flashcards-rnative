@@ -39,7 +39,7 @@ export const setLocalNotification = async () => {
         },
       });
 
-      AsyncStorage.setItem("Flashcard:NOTIFICATION", "NotificationSet");
+      await AsyncStorage.setItem("Flashcard:NOTIFICATION", "NotificationSet");
     }
   }
 };
