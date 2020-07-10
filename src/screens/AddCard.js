@@ -33,17 +33,20 @@ export class AddCard extends Component {
 
   submitCard = () => {
     const { question, answer, deckId } = this.state;
-
-    const questionObj = {
-      question,
-      answer,
-    };
-    this.props.addCard(questionObj, deckId);
-    this.setState({
-      question: "",
-      answer: "",
-    });
-    this.props.navigation.navigate("DeckDetail");
+    if (question !== "" && answer !== "") {
+      const questionObj = {
+        question,
+        answer,
+      };
+      this.props.addCard(questionObj, deckId);
+      this.setState({
+        question: "",
+        answer: "",
+      });
+      this.props.navigation.navigate("DeckDetail");
+    } else {
+      alert("Please enter Question/Answer");
+    }
   };
 
   render() {

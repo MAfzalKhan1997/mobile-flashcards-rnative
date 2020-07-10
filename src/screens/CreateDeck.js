@@ -22,18 +22,21 @@ export class CreateDecks extends Component {
 
   createDeck = () => {
     const { deckTitle } = this.state;
+    if (deckTitle !== "") {
+      const deckObj = {
+        id: deckId(),
+        title: deckTitle,
+        questions: [],
+      };
+      this.props.createDeck(deckObj);
+      this.setState({
+        deckTitle: "",
+      });
 
-    const deckObj = {
-      id: deckId(),
-      title: deckTitle,
-      questions: [],
-    };
-    this.props.createDeck(deckObj);
-    this.setState({
-      deckTitle: "",
-    });
-
-    this.props.navigation.navigate("DeckDetail");
+      this.props.navigation.navigate("DeckDetail");
+    } else {
+      alert("Please enter Deck title");
+    }
   };
 
   render() {

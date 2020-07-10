@@ -41,6 +41,7 @@ export class Quiz extends Component {
     } else {
       this.setState({
         questionNo: questionNo + 1,
+        isAnswer: false,
       });
     }
   };
@@ -60,6 +61,7 @@ export class Quiz extends Component {
     } else {
       this.setState({
         questionNo: questionNo + 1,
+        isAnswer: false,
       });
     }
   };

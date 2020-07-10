@@ -9,6 +9,7 @@ export class DeckDetail extends Component {
     super(props, context);
 
     this.state = {};
+    this.setTitle(props);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
