@@ -67,7 +67,6 @@ export class AllDecks extends Component {
 }
 
 const mapStateToProps = ({ data }) => {
-  //   console.log("REDUX_STATE", data);
   return {
     decks: data.decks || [],
   };

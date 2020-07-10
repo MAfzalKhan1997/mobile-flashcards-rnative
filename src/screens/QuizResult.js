@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
+import {
+  setLocalNotification,
+  clearLocalNotification,
+} from "../services/notifications";
+
 export class QuizResult extends Component {
   constructor(props, context) {
     super(props, context);
@@ -16,6 +21,8 @@ export class QuizResult extends Component {
     this.setState({
       resultObj,
     });
+    clearLocalNotification();
+    setLocalNotification();
   }
 
   render() {

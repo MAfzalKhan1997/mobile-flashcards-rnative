@@ -65,7 +65,6 @@ export class Quiz extends Component {
   render() {
     const { isAnswer, questionNo, correctGuess } = this.state;
     const { deckObj } = this.props;
-    console.log(correctGuess);
     return (
       <View
         style={{ flex: 1, justifyContent: "center", backgroundColor: "white" }}

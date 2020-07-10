@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Feather } from "@expo/vector-icons";
 
 import AllDecks from "../screens/AllDecks";
 import CreateDeck from "../screens/CreateDeck";
@@ -9,7 +10,6 @@ import DeckDetail from "../screens/DeckDetail";
 import AddCard from "../screens/AddCard";
 import Quiz from "../screens/Quiz";
 import QuizResult from "../screens/QuizResult";
-import { Feather } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
